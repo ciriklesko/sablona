@@ -1,4 +1,12 @@
 <!DOCTYPE html>
+<?php
+  include_once "classes/QnA.php";
+  use otazkyodpovede\QnA;
+
+  $qna = new QnA();
+  $qna->insertQnA();
+  $data = $qna->getQnA(); 
+?>
 <html lang="sk">
 <head>
     <meta charset="UTF-8">
@@ -41,16 +49,13 @@
       </div>
     </section>
       <section class="container">
-        <?php include "otazky.php"; ?>
-        <?php for ($i = 0; $i < count($otazky); $i++) { ?>
+        <?php foreach ($data as $item): ?>
           <div class="accordion">
-            <div class="question"><?php echo $otazky[$i];
-      ?></div>
-            <div class="answer">
-      <?php echo $odpovede[$i]; ?></div>
+            <div class="question"><?php echo $item['otazka']; ?></div>
+            <div class="answer"><?php echo $item['odpoved']; ?></div>
           </div>
-        <?php } ?>
-        </section>
+        <?php endforeach; ?>
+      </section>
 
     </section>
   </div>
